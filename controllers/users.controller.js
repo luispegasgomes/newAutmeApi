@@ -65,7 +65,7 @@ exports.login = async (req, res) => {
         console.log(req.body.password, user.password)
         // tests a string (password in body) against a hash (password in database)
         const check = bcrypt.compareSync(req.body.password, user.password);
-        if (!check) return res.status(401).json({
+        if (check) return res.status(401).json({
             success: false,
             accessToken: null,
             msg: "Invalid credentials!"
